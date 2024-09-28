@@ -4,6 +4,7 @@ import { Mail, Lock, Loader } from "lucide-react";
 import { Link } from "react-router-dom";
 import Input from "../components/Input";
 import { useAuthStore } from "../store/authStore";
+import FloatingShape from "../components/FloatingShape";
 
 const LoginPage = () => {
 	const [email, setEmail] = useState("");
@@ -18,9 +19,9 @@ const LoginPage = () => {
 
 	return (
 		<div className="flex justify-center items-center min-h-screen">
-			<FloatingShape color='bg-green-500' size='w-64 h-64' top='-5%' left='10%' delay={0} />
-			<FloatingShape color='bg-emerald-500' size='w-48 h-48' top='70%' left='80%' delay={5} />
-			<FloatingShape color='bg-lime-500' size='w-32 h-32' top='40%' left='-10%' delay={2} />
+			<FloatingShape color='bg-blue-500' size='w-64 h-64' top='-5%' left='10%' delay={0} />
+			<FloatingShape color='bg-indigo-500' size='w-48 h-48' top='70%' left='80%' delay={5} />
+			<FloatingShape color='bg-cyan-500' size='w-32 h-32' top='40%' left='-10%' delay={2} />
 		<motion.div
 			initial={{ opacity: 0, y: 20 }}
 			animate={{ opacity: 1, y: 0 }}

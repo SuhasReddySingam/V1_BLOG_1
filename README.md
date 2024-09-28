@@ -20,7 +20,10 @@ CLIENT_URL= http://localhost:5173
 ```shell
 npm run build
 ```
-
+### After doing the above run this to just to be safe so the code can run smoothly
+```shell
+npm audit fix
+```
 ### Start the app
 
 ```shell
