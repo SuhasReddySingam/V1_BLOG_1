@@ -1,4 +1,5 @@
 This is the V1 of the website it has user authentication feature and ability to add blogs for the user.
+AI integration needs to be implemented
 
 ### Setup .env file
 
