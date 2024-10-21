@@ -1,11 +1,13 @@
 import { create } from "zustand";
+import axios from "axios";
 
+axios.defaults.withCredentials = true;
 export const useProductStore = create((set) => ({
 	products: [],
 	setProducts: (products) => set({ products }),
 	createProduct: async (newProduct) => {
 		if (!newProduct.title || !newProduct.authour || !newProduct.body) {
-			return { success: false, message: "Please fill in all fields." };
+			return { success: false, message: "Error in creating blog please try again" };
 		}
 		const res = await fetch("/api/products", {
 			method: "POST",
@@ -18,8 +20,16 @@ export const useProductStore = create((set) => ({
 		set((state) => ({ products: [...state.products, data.data] }));
 		return { success: true, message: "Product created successfully" };
 	},
+	// createProduct: async (title,authour,body) => {
+	// 	try {
+	// 		await axios.post(`${API_URL}/create`, { title, authour,body });
+	// 	} catch (error) {
+	// 		set({ error: error.response.data.message || "Error",});
+	// 		throw error;
+	// 	}
+	// },
 	fetchProducts: async () => {
-		const res = await fetch("/api/products");
+		const res = await fetch("/api/products/view");
 		const data = await res.json();
 		set({ products: data.data });
 	},

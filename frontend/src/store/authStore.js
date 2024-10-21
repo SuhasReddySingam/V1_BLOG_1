@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import axios from "axios";
 
-const API_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api/auth" : "/api/auth";
+const API_URL = import.meta.env.MODE === "development" ? "http://localhost:8090/api/auth" : "/api/auth";
 
 axios.defaults.withCredentials = true;
 
@@ -38,6 +38,21 @@ export const useAuthStore = create((set) => ({
 			throw error;
 		}
 	},
+	googlelogin: async () => {
+		set({ isLoading: true, error: null });
+		try {
+			set({
+				isAuthenticated: true,	
+				error: null,
+				isLoading: false,
+			});
+			console.log(isAuthenticated);
+		} catch (error) {
+			set({ error: error.response?.data?.message || "Error logging in", isLoading: false });
+			throw error;
+		}
+	},
+
 
 	logout: async () => {
 		set({ isLoading: true, error: null });

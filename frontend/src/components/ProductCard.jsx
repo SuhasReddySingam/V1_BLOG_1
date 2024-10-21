@@ -91,7 +91,6 @@ const ProductCard = ({ product }) => {
 			<Box p={4} w='full'>
 				<Heading as='h3' size='md' mb={2}>
 					<Center>
-
 					{product.title}
 					</Center>
 				</Heading>
@@ -102,10 +101,9 @@ const ProductCard = ({ product }) => {
 
 					</Center>
 				</Text>
-				<Text fontWeight='bold' fontSize='xl' color={textColor} mb={4}>
+				<Text fontWeight='semi-bold' fontSize='lg' color={textColor} mb={4} whiteSpace="pre-line">
 					<Center>
 					{product.body}
-
 					</Center>
 				</Text>
 
