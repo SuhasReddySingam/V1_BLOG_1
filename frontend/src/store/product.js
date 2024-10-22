@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import axios from "axios";
 
+const API_URL = import.meta.env.MODE === "development" ? "http://localhost:8090/api/auth" : "/api/auth";
 axios.defaults.withCredentials = true;
 export const useProductStore = create((set) => ({
 	products: [],
@@ -9,7 +10,7 @@ export const useProductStore = create((set) => ({
 		if (!newProduct.title || !newProduct.authour || !newProduct.body) {
 			return { success: false, message: "Error in creating blog please try again" };
 		}
-		const res = await fetch("/api/products", {
+		const res = await fetch("/api/products/create", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -20,16 +21,8 @@ export const useProductStore = create((set) => ({
 		set((state) => ({ products: [...state.products, data.data] }));
 		return { success: true, message: "Product created successfully" };
 	},
-	// createProduct: async (title,authour,body) => {
-	// 	try {
-	// 		await axios.post(`${API_URL}/create`, { title, authour,body });
-	// 	} catch (error) {
-	// 		set({ error: error.response.data.message || "Error",});
-	// 		throw error;
-	// 	}
-	// },
-	fetchProducts: async () => {
-		const res = await fetch("/api/products/view");
+	fetchProducts: async (name) => {
+		const res = await fetch(`/api/products/view/${name}`);
 		const data = await res.json();
 		set({ products: data.data });
 	},

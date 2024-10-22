@@ -71,7 +71,7 @@ function App() {
 					</ProtectedRoute>
 			
 			} />
-				<Route path='/view' element={<ProtectedRoute>
+				<Route path='/view/:name' element={<ProtectedRoute>
 					<ViewPage />
 					</ProtectedRoute>
 			

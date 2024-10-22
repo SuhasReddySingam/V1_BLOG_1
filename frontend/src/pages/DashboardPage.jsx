@@ -10,15 +10,11 @@ import Navbar from "../components/Navbar";
 import { GoogleLogin,googleLogout } from "@react-oauth/google";
 const HomePage = () => {
 	const { user, logout } = useAuthStore();
-
-	const handleLogout = () => {
-		logout();
-	};
 	const { fetchProducts, products } = useProductStore();
 
 	useEffect(() => {
-		fetchProducts();
-	}, [fetchProducts]);
+		fetchProducts(user.name);
+	}, [fetchProducts,user.name]);
 	console.log("products", products);
 
 	return (
@@ -42,7 +38,7 @@ const HomePage = () => {
                         <br/>
                         
 					</Link>
-					<Link to={"/view"}>
+					<Link to={`/view/${user.name}`}>
 			<motion.button
 						whileHover={{ scale: 1.02 }}
 						whileTap={{ scale: 0.98 }}

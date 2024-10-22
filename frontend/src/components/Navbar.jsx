@@ -76,7 +76,7 @@ const Navbar = () => {
 						Create a Blog
 					</Link>
 					<br/>
-		  <Link to={"/view"} className='text-blue-400 hover:underline'>
+		  <Link to={`/view/${user.name}`} className='text-blue-400 hover:underline'>
 						View all the blogs you created
 					</Link>
 					<br/>

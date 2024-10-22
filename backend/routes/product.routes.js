@@ -2,8 +2,8 @@ import express from "express";
 import { createProduct, deleteProduct, getProducts, updateProduct } from "../controllers/blog.controller.js";
 const router = express.Router();
 
-router.get("/view", getProducts);
-router.post("/", createProduct);
+router.get("/view/:name", getProducts);
+router.post("/create", createProduct);
 router.put("/:id", updateProduct);
 router.delete("/:id", deleteProduct);
 
