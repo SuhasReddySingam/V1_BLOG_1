@@ -9,7 +9,6 @@ const CreatePage = () => {
     const model="meta-llama/Meta-Llama-3-8B-Instruct";
     const { user }=useAuthStore();
     const [newPrompt,setNewPrompt]=useState("");
-	const [body1,setBody]=useState("");
 	const toast = useToast();
 	const [blog,setBlog]=useState({
 		title:"Made with blogger",
