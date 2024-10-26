@@ -4,7 +4,7 @@ export const useProductStore = create((set) => ({
 	setProducts: (products) => set({ products }),
 	createProduct: async (newProduct) => {
 		if (!newProduct.title || !newProduct.authour || !newProduct.body) {
-			return { success: false, message: "Error in creating blog please try again" };
+			return { success: false, message: "Error in saving blog please try again" };
 		}
 		const res = await fetch("/api/products/create", {
 			method: "POST",

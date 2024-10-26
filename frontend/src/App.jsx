@@ -71,6 +71,11 @@ function App() {
 					</ProtectedRoute>
 			
 			} />
+			<Route path='/create-norm' element={<ProtectedRoute>
+					<CreatePage />
+					</ProtectedRoute>
+			
+			} />
 				<Route path='/view/:name' element={<ProtectedRoute>
 					<ViewPage />
 					</ProtectedRoute>

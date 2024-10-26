@@ -1,11 +1,13 @@
-import { Box, Button, Container, Heading, Input, useColorModeValue, useToast, VStack} from "@chakra-ui/react";
+import { Box, Button, calc, Container, Heading, Input, useColorModeValue, useToast, VStack,Textarea} from "@chakra-ui/react";
 import { useState } from "react";
 import { useProductStore } from "../store/product";
 import Navbar from "../components/Navbar";
+import { useAuthStore } from "../store/authStore";
 const CreatePage = () => {
+	const { user }=useAuthStore();
 	const [newProduct, setNewProduct] = useState({
 		title: "",
-		authour: "",
+		authour:user.name,
 		body: "",
 	});
 	const toast = useToast();
@@ -35,31 +37,31 @@ const CreatePage = () => {
 
 	return (
 		<div>
-		<Box minH={"100vh"} bg={useColorModeValue("gray.100", "gray.900")}>
+		<Box minH={"100vh"}  bg={useColorModeValue("gray.100", "gray.900")}>
 		<Navbar />
-		<Container maxW={"container.sm"}>
+
 			<VStack spacing={8}>
-				<Heading as={"h1"} size={"2xl"} textAlign={"center"} mb={8}>
+				<Heading as={"h1"} size={"2xl"} textAlign={"center"} mb={8} >
 					Create New Blog
 				</Heading>
 
-				<Box w={"full"} bg={useColorModeValue("white", "gray.800")} p={6} rounded={"lg"} shadow={"md"}>
+				<Box minW={"full"} minH={"100vh"} bg={useColorModeValue("white", "gray.800")} p={6} rounded={"lg"} shadow={"md"}>
 					<VStack spacing={4}>
 						<Input
 							placeholder='Title'
 							name='title'
+							fontWeight={"bold"}
+							bg={"gray.600"}
 							value={newProduct.title}
 							onChange={(e) => setNewProduct({ ...newProduct, title: e.target.value })}
 							/>
-						<Input
-							placeholder='authour'
-							name='authour'
-							value={newProduct.authour}
-							onChange={(e) => setNewProduct({ ...newProduct, authour: e.target.value })}
-							/>
-						<Input
-							placeholder='Body'
+						<Textarea
+							placeholder='Body...'
 							name='body'
+							bg={"gray.600"}
+							variant={"subtle"}
+							height={"80vh"}
+							fontWeight={"medium"}
 							value={newProduct.body}
 							onChange={(e) => setNewProduct({ ...newProduct, body: e.target.value })}
 							/>
@@ -70,7 +72,7 @@ const CreatePage = () => {
 					</VStack>
 				</Box>
 			</VStack>
-		</Container>
+
 		</Box>
 	</div>
 	);

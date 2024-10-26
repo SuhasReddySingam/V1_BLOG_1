@@ -1,15 +1,18 @@
-import { Box, Button, Container, Heading, Input, useColorModeValue, useToast, VStack} from "@chakra-ui/react";
+import { Box, Button, Center, Container, Heading, Input, useColorModeValue, useToast, VStack,Text} from "@chakra-ui/react";
 import { useState } from "react";
 import { useProductStore } from "../store/product";
 import Navbar from "../components/Navbar";
+import { motion } from "framer-motion";
 import { useAuthStore } from "../store/authStore";
 import {HfInference} from '@huggingface/inference';
 const CreatePage = () => {
-    const inference=new HfInference("Enter your API key here");
+    const inference=new HfInference("Insert API key");
     const model="meta-llama/Meta-Llama-3-8B-Instruct";
     const { user }=useAuthStore();
     const [newPrompt,setNewPrompt]=useState("");
+	const [output,setOutput]=useState();
 	const toast = useToast();
+	const textColor = useColorModeValue("gray.600", "gray.200");
 	const [blog,setBlog]=useState({
 		title:"Made with blogger",
 		authour:user.name,
@@ -23,13 +26,18 @@ const CreatePage = () => {
             model: model,
             inputs: newPrompt,
             parameters: { max_new_tokens: 800 }
-          })) {
-			setBlog({...blog,body:output.generated_text});
+          })) 
+		  {
+			setOutput(output.generated_text);
           }
-				console.log(blog.body);
-				console.log(blog.authour);
-				console.log(blog.title);
-				const { success, message } = await createProduct(blog)
+			console.log(output);
+			console.log(user.name);
+			console.log(newPrompt);	
+
+	};
+	const saveBlog= async () =>{
+		setBlog({...blog,body:output});
+		const { success, message } = await createProduct(blog)
 				if (!success) {
 					toast({
 						title: "Error",
@@ -47,7 +55,7 @@ const CreatePage = () => {
 				}
         setNewPrompt("");
 
-	};
+	}
     
 
 	return (
@@ -75,6 +83,30 @@ const CreatePage = () => {
 				</Box>
 			</VStack>
 		</Container>
+		<Box w={"full"}  p={6} rounded={"lg"} shadow={"md"} >
+					<VStack spacing={9}>
+
+						{output !== undefined && (
+					<Text fontWeight='semi-bold' fontSize='lg' color={textColor} mb={4} whiteSpace="pre-line">
+						{output}
+
+						<motion.button
+						whileHover={{ scale: 1.02 }}
+						whileTap={{ scale: 0.98 }}
+						onClick={saveBlog}
+						className='w-full py-3 px-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold rounded-lg shadow-lg hover:from-indigo-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition duration-200'>
+							Save the Blog
+						</motion.button>
+
+					</Text>
+       						 )}
+						</VStack>
+					{output === undefined && (
+            	<Text fontSize='xl' textAlign={"center"} fontWeight='bold' color='gray.500'>
+            	</Text>
+        					)}
+
+				</Box>
 		</Box>
 	</div>
 	);

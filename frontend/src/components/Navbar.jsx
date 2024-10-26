@@ -1,5 +1,6 @@
 import { Button, Container, Flex, HStack, Text, useColorMode, useDisclosure } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { FaRobot } from "react-icons/fa";
 import { formatDate } from "../utils/date";
 import {
 	Drawer,
@@ -50,8 +51,13 @@ const Navbar = () => {
 					<Link to={"/"}>Blogger</Link>
 				</Text>
 
-				<HStack spacing={10} alignItems={"center"}>
+				<HStack spacing={5} alignItems={"center"}>
 					<Link to={"/create"}>
+						<Button>
+						<FaRobot />
+						</Button>
+					</Link>
+					<Link to={"/create-norm"}>
 						<Button>
 							<PlusSquareIcon fontSize={20} />
 						</Button>
@@ -73,6 +79,10 @@ const Navbar = () => {
 			<p>Last Login:{formatDate(user.lastLogin)}</p>
 			<br/>
 			<Link to={"/create"} className='text-blue-400 hover:underline'>
+						Create a Blog with AI
+					</Link>
+					<br/>
+					<Link to={"/create-norm"} className='text-blue-400 hover:underline'>
 						Create a Blog
 					</Link>
 					<br/>
