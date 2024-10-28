@@ -37,7 +37,7 @@ const CreatePage = () => {
 
 	return (
 		<div>
-		<Box minH={"100vh"}  bg={useColorModeValue("gray.100", "gray.900")}>
+		<Box minH={"100vh"}  bg={"gray.900"}>
 		<Navbar />
 
 			<VStack spacing={8}>
@@ -45,7 +45,7 @@ const CreatePage = () => {
 					Create New Blog
 				</Heading>
 
-				<Box minW={"full"} minH={"100vh"} bg={useColorModeValue("white", "gray.800")} p={6} rounded={"lg"} shadow={"md"}>
+				<Box minW={"full"} minH={"100vh"} bg={"gray.800"} p={6} rounded={"lg"} shadow={"md"}>
 					<VStack spacing={4}>
 						<Input
 							placeholder='Title'

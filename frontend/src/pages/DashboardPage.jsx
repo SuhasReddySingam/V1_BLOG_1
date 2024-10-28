@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -20,7 +21,7 @@ import Navbar from "../components/Navbar";
 
 const HomePage = () => {
 
-	const { user, logout } = useAuthStore();
+	const { user} = useAuthStore();
 	const { fetchProducts, products } = useProductStore();
 
 	useEffect(() => {

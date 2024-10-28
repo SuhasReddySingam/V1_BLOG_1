@@ -23,7 +23,7 @@ const ViewPage = () => {
 
   return (
     <div>
-      <Box minH={"100vh"} bg={useColorModeValue("gray.100", "gray.900")}>
+      <Box minH={"100vh"} bg={"gray.900"}>
 
 <Navbar />
 <Container maxW='container.xl' py={12}>

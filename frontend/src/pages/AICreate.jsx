@@ -6,13 +6,13 @@ import { motion } from "framer-motion";
 import { useAuthStore } from "../store/authStore";
 import {HfInference} from '@huggingface/inference';
 const CreatePage = () => {
-    const inference=new HfInference("Insert API key");
+    const inference=new HfInference("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");
     const model="meta-llama/Meta-Llama-3-8B-Instruct";
     const { user }=useAuthStore();
     const [newPrompt,setNewPrompt]=useState("");
 	const [output,setOutput]=useState();
 	const toast = useToast();
-	const textColor = useColorModeValue("gray.600", "gray.200");
+	const textColor = "gray.200";
 	const [blog,setBlog]=useState({
 		title:"Made with blogger",
 		authour:user.name,
@@ -60,7 +60,7 @@ const CreatePage = () => {
 
 	return (
 		<div>
-		<Box minH={"100vh"} bg={useColorModeValue("gray.100", "gray.900")}>
+		<Box minH={"100vh"} bg={"gray.900"}>
 		<Navbar />
 		<Container maxW={"container.sm"}>
 			<VStack spacing={8}>
@@ -68,7 +68,7 @@ const CreatePage = () => {
 					Create New Blog
 				</Heading>
 
-				<Box w={"full"} bg={useColorModeValue("white", "gray.800")} p={6} rounded={"lg"} shadow={"md"}>
+				<Box w={"full"} bg={"gray.800"} p={6} rounded={"lg"} shadow={"md"}>
 					<VStack spacing={4}>
                         <Input
 							placeholder='Prompt'

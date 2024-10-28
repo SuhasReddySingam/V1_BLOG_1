@@ -5,7 +5,6 @@ import { formatDate } from "../utils/date";
 import {
 	Drawer,
 	DrawerBody,
-	DrawerFooter,
 	DrawerHeader,
 	DrawerOverlay,
 	DrawerContent,
@@ -92,7 +91,7 @@ const Navbar = () => {
 					<br/>
 					<br/>
 					<hr/>
-			<Text onClick={handleLogout} className="font-bold text-lg hover:cursor-pointer">Logout</Text>
+			<Text onClick={handleLogout} className="font-bold text-lg hover:text-blue-800 hover:cursor-pointer">Logout</Text>
 			
 
 		  </DrawerBody>
