@@ -23,7 +23,10 @@ const HomePage = () => {
 
 	const { user} = useAuthStore();
 	const { fetchProducts, products } = useProductStore();
-
+    window.onload= function() {
+  Particles.init({
+    selector: '.background'});
+};
 	useEffect(() => {
 		fetchProducts(user.name);
 	}, [fetchProducts,user.name]);

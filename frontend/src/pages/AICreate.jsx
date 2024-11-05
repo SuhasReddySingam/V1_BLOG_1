@@ -1,4 +1,4 @@
-import { Box, Button, Center, Container, Heading, Input, useColorModeValue, useToast, VStack,Text} from "@chakra-ui/react";
+import { Box, Button, Center, Container, Heading, Input, useColorModeValue, useToast, VStack,Text,Textarea} from "@chakra-ui/react";
 import { useState } from "react";
 import { useProductStore } from "../store/product";
 import Navbar from "../components/Navbar";
@@ -10,6 +10,8 @@ const CreatePage = () => {
     const model="meta-llama/Meta-Llama-3-8B-Instruct";
     const { user }=useAuthStore();
     const [newPrompt,setNewPrompt]=useState("");
+	const [userReq,setUserReq]=useState("");
+	const [summary,setSummary]=useState("");
 	const [output,setOutput]=useState();
 	const toast = useToast();
 	const textColor = "gray.200";
@@ -24,7 +26,7 @@ const CreatePage = () => {
 	const makeBlog = async () => {
 		for await (const output of inference.textGenerationStream({
             model: model,
-            inputs: newPrompt,
+            inputs: newPrompt+"do not answer if the input is not about making blogs or about generating ideas in cases like this answer in 20 words and do not repeat the input in the generated text",
             parameters: { max_new_tokens: 800 }
           })) 
 		  {
@@ -35,6 +37,18 @@ const CreatePage = () => {
 			console.log(newPrompt);	
 
 	};
+	const generateSummary=async()=>{
+		const result=await inference.summarization({
+			model: 'facebook/bart-large-cnn',
+			inputs:
+			  [userReq+"answer please enter an input if no string is recived"],
+			parameters: {
+			  max_length: 100
+			}
+		  })
+		  setSummary(result.summary_text);
+		  setUserReq("");
+	}
 	const saveBlog= async () =>{
 		setBlog({...blog,body:output});
 		const { success, message } = await createProduct(blog)
@@ -60,7 +74,7 @@ const CreatePage = () => {
 
 	return (
 		<div>
-		<Box minH={"100vh"} bg={"gray.900"}>
+		<Box minH={"100vh"} bg={"gray.900"} minW={"100vh"}>
 		<Navbar />
 		<Container maxW={"container.sm"}>
 			<VStack spacing={8}>
@@ -102,6 +116,44 @@ const CreatePage = () => {
        						 )}
 						</VStack>
 					{output === undefined && (
+            	<Text fontSize='xl' textAlign={"center"} fontWeight='bold' color='gray.500'>
+            	</Text>
+        					)}
+
+				</Box>
+			<VStack spacing={4}>
+				<Heading as={"h1"} size={"2xl"} textAlign={"center"} mb={8}>
+						Summarize
+				</Heading>
+
+				<Box w={"120vh"} bg={"gray.800"} p={6} rounded={"lg"} shadow={"md"}>
+					<VStack spacing={4}>
+					<Textarea
+							placeholder='Enter your text'
+							name='body'
+							bg={"gray.600"}
+							variant={"subtle"}
+							height={"40vh"}
+							fontWeight={"medium"}
+							resize={"both"}
+							 onChange={(e) => setUserReq(e.target.value)}
+							/>
+						<Button colorScheme='blue' onClick={generateSummary} w='full' isDisabled={userReq.length===0}>
+							Generate Summary
+						</Button>
+					</VStack>
+				</Box>
+			</VStack>
+			<Box w={"full"}  p={6} rounded={"lg"} shadow={"md"} >
+					<VStack spacing={9}>
+
+						{summary !== undefined && (
+					<Text fontWeight='semi-bold' fontSize='lg' color={textColor} mb={4} whiteSpace="pre-line">
+						{summary}
+					</Text>
+       						 )}
+						</VStack>
+					{summary === undefined && (
             	<Text fontSize='xl' textAlign={"center"} fontWeight='bold' color='gray.500'>
             	</Text>
         					)}
