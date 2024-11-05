@@ -26,8 +26,8 @@ import { useState } from "react";
 const ProductCard = ({ product }) => {
 	const [updatedProduct, setUpdatedProduct] = useState(product);
 
-	const textColor = useColorModeValue("gray.600", "gray.200");
-	const bg = useColorModeValue("white", "gray.800");
+	const textColor = "gray.200";
+	const bg = "gray.800";
 
 	const { deleteProduct, updateProduct } = useProductStore();
 	const toast = useToast();
