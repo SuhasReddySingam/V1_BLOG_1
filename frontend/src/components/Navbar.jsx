@@ -12,8 +12,6 @@ import {
   } from '@chakra-ui/react'
   import { Avatar, AvatarBadge, AvatarGroup } from '@chakra-ui/react'
 import { PlusSquareIcon } from "@chakra-ui/icons";
-import { IoMoon } from "react-icons/io5";
-import { LuSun } from "react-icons/lu";
 import { useRef } from "react";
 import { useAuthStore } from "../store/authStore";
 const Navbar = () => {

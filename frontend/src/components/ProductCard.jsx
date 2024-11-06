@@ -100,7 +100,7 @@ const ProductCard = ({ product }) => {
 
 					</Center>
 				</Text>
-				<Text fontWeight='semi-bold' fontSize='lg' color={textColor} mb={4} whiteSpace="pre-line">
+				<Text  fontSize='lg' color={textColor} mb={4} whiteSpace="pre-line" className="font-serif">
 					<Center>
 					{product.body}
 					</Center>

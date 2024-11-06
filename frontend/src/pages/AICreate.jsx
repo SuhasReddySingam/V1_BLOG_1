@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { useAuthStore } from "../store/authStore";
 import {HfInference} from '@huggingface/inference';
 const CreatePage = () => {
-    const inference=new HfInference("Enter API Key");
+    const inference=new HfInference("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");
     const model="meta-llama/Meta-Llama-3-8B-Instruct";
     const { user }=useAuthStore();
     const [newPrompt,setNewPrompt]=useState("");
@@ -26,7 +26,7 @@ const CreatePage = () => {
 	const makeBlog = async () => {
 		for await (const output of inference.textGenerationStream({
             model: model,
-            inputs: newPrompt+"do not answer if the input is not about making blogs or about generating ideas in cases like this answer in 20 words and do not repeat the input in the generated text",
+            inputs: newPrompt	,
             parameters: { max_new_tokens: 800 }
           })) 
 		  {
@@ -98,10 +98,18 @@ const CreatePage = () => {
 			</VStack>
 		</Container>
 		<Box w={"full"}  p={6} rounded={"lg"} shadow={"md"} >
-					<VStack spacing={9}>
 
 						{output !== undefined && (
-					<Text fontWeight='semi-bold' fontSize='lg' color={textColor} mb={4} whiteSpace="pre-line">
+							<Box shadow='lg'
+					overflow='hidden'
+					transition='all 0.3s'
+					_hover={{ transform: "translateY(-5px)", shadow: "xl" }}
+					bg={"gray.800"}
+					maxW='full'
+					w='100%'>
+						
+					<VStack spacing={9}>
+					<Text fontWeight='semi-bold' fontSize='lg' color={textColor} mb={4} whiteSpace="pre-line" >
 						{output}
 
 						<motion.button
@@ -113,8 +121,9 @@ const CreatePage = () => {
 						</motion.button>
 
 					</Text>
-       						 )}
 						</VStack>
+						</Box>
+       						 )}
 					{output === undefined && (
             	<Text fontSize='xl' textAlign={"center"} fontWeight='bold' color='gray.500'>
             	</Text>
