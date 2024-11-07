@@ -6,8 +6,8 @@ import { motion } from "framer-motion";
 import { useAuthStore } from "../store/authStore";
 import {HfInference} from '@huggingface/inference';
 const CreatePage = () => {
-    const inference=new HfInference("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");
-    const model="meta-llama/Meta-Llama-3-8B-Instruct";
+    const inference=new HfInference("Enter API key");
+    const model="meta-llama/Meta-Llama-3.2-3B-Instruct";
     const { user }=useAuthStore();
     const [newPrompt,setNewPrompt]=useState("");
 	const [userReq,setUserReq]=useState("");
