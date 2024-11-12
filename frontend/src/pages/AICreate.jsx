@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { useAuthStore } from "../store/authStore";
 import {HfInference} from '@huggingface/inference';
 const CreatePage = () => {
-    const inference=new HfInference("Enter your API key here");
+    const inference=new HfInference("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");
     const model="meta-llama/Llama-3.2-3B-Instruct";
     const { user }=useAuthStore();
     const [newPrompt,setNewPrompt]=useState("");
@@ -26,22 +26,27 @@ const CreatePage = () => {
 	const { createProduct } = useProductStore();
 
 	const makeBlog = async () => {
-		setIsLoading(true)
+		setOutput("");
+		setIsLoading(true);
+		let currentOutput = "";
+	  
 		for await (const output of inference.textGenerationStream({
-            model: model,
-            inputs: newPrompt, 
-            parameters: { max_new_tokens: 800 ,return_full_text:false}
-          })) 
-		  {
-			setOutput(output.generated_text);
-          }
-		  
-		  setIsLoading(false);
-			console.log(output);
-			console.log(user.name);
-			console.log(newPrompt);	
+		  model: model,
+		  inputs: newPrompt,
+		  parameters: { max_new_tokens: 800, return_full_text: false }
+		})) {
+			if(output.generated_text!=null){
 
-	};
+				currentOutput += output.generated_text;
+				setOutput(currentOutput);
+			}
+		}
+	  
+		setIsLoading(false);
+		console.log(output);
+		console.log(user.name);
+		console.log(newPrompt);
+	  };
 	const generateSummary=async()=>{
 		const result=await inference.summarization({
 			model: 'facebook/bart-large-cnn',
@@ -125,6 +130,8 @@ const CreatePage = () => {
 						whileHover={{ scale: 1.02 }}
 						whileTap={{ scale: 0.98 }}
 						onClick={saveBlog}
+						disabled={isLoading}
+						hidden={isLoading}
 						className='w-full py-3 px-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold rounded-lg shadow-lg hover:from-indigo-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition duration-200'>
 							Save the Blog
 						</motion.button>
@@ -132,7 +139,7 @@ const CreatePage = () => {
 					</Text>
 						</VStack>
        						 )}
-					{output === undefined && (
+					{isLoading === true && (
 						<Text>
 							{isLoading === true &&(
 								  <HStack gap="5">
