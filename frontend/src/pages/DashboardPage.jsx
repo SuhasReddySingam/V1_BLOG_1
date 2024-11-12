@@ -7,7 +7,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-
+import '../utils/styles.css';
 
 // import required modules
 import { Autoplay, Pagination, Navigation,EffectFade } from 'swiper/modules';
@@ -80,14 +80,14 @@ const HomePage = () => {
           clickable: true,
         }}
         
-        modules={[Autoplay, Pagination, Navigation,EffectFade]}
+        modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
       >
         <SwiperSlide> <img class="w-full hidden dark:block" src="https://st5.depositphotos.com/4678277/62570/i/1600/depositphotos_625703794-stock-photo-photo-confident-busy-programmer-wear.jpg" alt="dashboard image"></img></SwiperSlide>
         <SwiperSlide> <img class="w-full hidden dark:block" src="https://raw.githubusercontent.com/Git-NSP/Blog/refs/heads/main/Intro_pic.jpg" alt="dashboard image"></img></SwiperSlide>
         <SwiperSlide> <img class="w-full hidden dark:block" src="https://images.ctfassets.net/pdf29us7flmy/7MAfLagu0g3iappEl8QH3S/5ebac5a5115d2ecd3eb357b992d949ee/GettyImages-643897728_optimized.jpg?w=1440&q=100&fm=avif" alt="dashboard image"></img></SwiperSlide>
         <SwiperSlide> <img class="w-full hidden dark:block" src="https://media.istockphoto.com/id/996082438/photo/software-developing-team-working-in-the-office.jpg?s=1024x1024&w=is&k=20&c=yohpRC8lW7xhI260Mo4WtNK7nmDmllcmW-6KI7qrfuE=" alt="dashboard image"></img></SwiperSlide>
-        <SwiperSlide> <img class="w-full hidden dark:block" src="https://cdn.vectorstock.com/i/2000v/73/96/our-goals-list-card-with-colorful-brush-strokes-vector-21757396.avif" alt="dashboard image"></img></SwiperSlide>
+        <SwiperSlide> <img class="w-full hidden dark:block" src="https://raw.githubusercontent.com/SuhasReddySingam/IMG-/refs/heads/main/b9bfc90b-fb38-4b0d-94a2-4453c686c335.jpeg" alt="dashboard image"></img></SwiperSlide>
       </Swiper>
         </div>                
     </div>
